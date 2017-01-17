@@ -4,14 +4,14 @@
 functionrefactor
 ==========
 
-```` functionrefactor is a `python script that removes C++ templates, and moves function implementations to the source file.
+Functionrefactor is a python script that removes C++ templates, and moves function implementations to the source file.
 
 ==========
-Replacing template Parameters
+Replacing template parameters
 ==========
 
 
-```` functionrefactor removes templates from C++ code by replacing the template argument with a using statement.
+`Functionrefactor removes templates from C++ code by replacing the template argument with an using statement or constexpr.
 
 For example on the example below the precision type is going to be replaced with a using statement and the function implementation will be moved in the cpp file. Of course anywhere that class is referenced with it’s template arguments it will need to be modified as the functionrefactor only modifies one header file.
 
@@ -40,7 +40,7 @@ For example on the example below the precision type is going to be replaced with
         auto OP = -Kc * (error - error_0) - (Kc) * (error)*dt / (ti * 60.0);
 
         error_1 = error_0;
-        error_0 = (error);
+        error_0 = error;
         return OP;
       }
       /* ... */
@@ -80,15 +80,14 @@ For example on the example below the precision type is going to be replaced with
           //more useful and witty comments here
         precision PID::velocity_algorithm_PI(precision error, precision dt)
         {
-          auto OP = -Kc * (error - error_0) -
-                    PhysicsEnginePP::sign<precision>(Kc) * (error)*dt / (ti * 60.0);
+          auto OP = -Kc * (error - error_0) - (Kc) * (error)*dt / (ti * 60.0);
 
           error_1 = error_0;
-          error_0 = (error);
+          error_0 = error;
           return OP;
         }
 
-Any constants declared withing the template arguments are going to be replaced with a constexpr and any default values will be used in the using/constexpr expression.
+Any constants declared within the template arguments are going to be replaced with a constexpr and any default values will be used in the using/constexpr expression.
 
 ==========
 Moving function Implementations
@@ -112,10 +111,7 @@ Release Notes
 
 Usage
 -----------------
-
-
-
-
+**Instructions to follow**
 
 
 
