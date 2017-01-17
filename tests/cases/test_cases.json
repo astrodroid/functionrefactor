@@ -1,0 +1,10 @@
+{
+    "cases_to_run": {
+        "01": true,
+        "02": true,
+        "03": true,
+        "inactive_scenario": false
+    },
+    "Help:": "key cases_to_run lists all the cases to run (normally using pytest).",
+    "Help++": "The filename is expected as follows: for case'01' is 01_in.hpp the output is simply 01.cpp and 01.hpp"
+}

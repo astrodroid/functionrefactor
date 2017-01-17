@@ -1,0 +1,10 @@
+{
+
+  "dontmove_on_cpp_if": { "=0": false, "concept": true, "const": false, "constexpr": true,
+                          "explicit": false, "final": false, "inline": true, "noexcept": false,
+                          "operator": false,  "override": false,  "virtual": false, "static": false }
+
+  ,"keywords_only_shown_in_hpp": { "=0": false, "concept": false, "const": true, "constexpr": false,
+                                "explicit": false, "final": false,  "inline": false, "noexcept": true,
+                                "operator": true, "override": false, "virtual": false , "static": true}
+}

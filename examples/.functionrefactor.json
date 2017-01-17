@@ -1,0 +1,6 @@
+{
+   "launcher":[
+      {"input":"test.hpp","active":true, "hpp_out":"out/", "cpp_out":"out/"},
+      {"input":"inactive.hpp", "active":false, "hpp_out":"out/", "cpp_out":"out/"}
+   ]
+}
