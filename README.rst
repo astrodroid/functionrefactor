@@ -11,7 +11,7 @@ Replacing template parameters
 ==========
 
 
-`Functionrefactor removes templates from C++ code by replacing the template argument with an using statement or constexpr.
+Functionrefactor removes templates from C++ code by replacing the template argument with an using statement or constexpr.
 
 For example on the example below the precision type is going to be replaced with a using statement and the function implementation will be moved in the cpp file. Of course anywhere that class is referenced with it’s template arguments it will need to be modified as the functionrefactor only modifies one header file.
 
@@ -46,10 +46,7 @@ For example on the example below the precision type is going to be replaced with
       /* ... */
     };
 
-    However for the example above a float precision is adequate, making the template argument unnecessary. In practice you can just as well do all that manually, bit it gets too much tiresome if you have a large codebase to convert.
-
-   functionrefactor replaces the template declaration with a using statement making the previous example as this:
-
+However for the example above a float precision is adequate, making the template argument unnecessary. In practice you can just as well do all that manually, bit it gets too much tiresome if you have a large codebase to convert.
 
   .. code-block:: cpp
 
