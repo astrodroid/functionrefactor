@@ -112,6 +112,7 @@ Installation through PIP will be added shortly, at the moment you can launch the
 
 
     python3 functionrefactor.py {path to json launcher file}
+    
     python3 functionrefactor.py {path to input header file} {path to output hpp} {path to output cpp}
 
 Alternatively you can do a local pip install from the functionrfactor root folder and then launching it as before.
