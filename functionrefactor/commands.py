@@ -12,6 +12,7 @@ __all__ = ['parse_header', 'parse_to_file', 'main']
 def parse_header(filename):
     parser = Parser()
     clang_formatter = Formatter()
+
     path_name = os.path.splitext(os.path.basename(filename))[0]
 
     text = clang_formatter.open_and_launch(filename)
@@ -35,16 +36,14 @@ def parse_to_file(filename, hpp_file=None, cpp_file=None):
     if not output_hpp:
         print("HeaderFile: ")
         print(output_hpp)
-    else:
+    elif hpp_file:
         with open(hpp_file, 'w') as hpp:
-
             hpp.writelines(s + '\n' for s in output_hpp)
 
     if not output_cpp:
         print("SourceFile: ")
         print(output_cpp)
-
-    else:
+    elif cpp_file:
         with open(cpp_file, 'w') as cpp:
             cpp.writelines(s + '\n' for s in output_cpp)
 
@@ -77,14 +76,25 @@ def load_launcher(file_path):
                 path + sep + input_file['cpp_out'] + file_name + '.cpp')
 
 
-def main(*args):
+def execute(argv=None):
+    if argv is None:
+        argv = sys.argv
+    main(argv)
+
+
+def main(args):
     """Entry point for the application script"""
-    if len(args[0]) == 0:
+    if len(args) == 0:
         load_launcher('.functionrefactor.json')
-    elif '.json' in args[0][1]:
-        load_launcher(args[0][1])
+    elif '.json' in args[0]:
+        load_launcher(args[0])
     else:
-        parse_to_file(args)
+        if len(args) == 2:
+            parse_to_file(args[1])
+        if len(args) == 3:
+            parse_to_file(args[1], args[2])
+        if len(args) > 3:
+            parse_to_file(args[1], args[2], args[3])
 
 
 if __name__ == '__main__':

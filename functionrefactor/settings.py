@@ -1,4 +1,5 @@
 import json
+import os
 
 __all__ = ['Settings', 'settings']
 
@@ -6,7 +7,8 @@ __all__ = ['Settings', 'settings']
 class Settings():
 
     def __init__(self):
-        with open("functionrefactor/settings.json", "r") as infile:
+        path = os.path.join(os.path.dirname(__file__), "settings.json")
+        with open(path, "r") as infile:
             self.json_file = json.load(infile)
 
         self._keywords_only_shown_in_hpp = self.json_file[

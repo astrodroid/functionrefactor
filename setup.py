@@ -18,7 +18,7 @@ with open('README.rst') as file_readme:
 
 setup(
     name='functionrefactor',
-    version='0.0.1',
+    version='0.0.2',
     description='Tidies up C++ headers. Moving C++ function implementations to the source file.',
     long_description=long_description,
     author='Andreas Angelopoulos',
@@ -29,11 +29,13 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6'
     ],
     keywords='C++ cpp',
     packages=find_packages(),
     entry_points={
         'console_scripts':
-        ['functionrefactor = functionrefactor.start:execute'],
+        ['functionrefactor = functionrefactor.commands:execute'],
     },)

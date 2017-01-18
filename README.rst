@@ -1,14 +1,14 @@
 
 
-==========
-functionrefactor
-==========
+================
+Functionrefactor
+================
 
 Functionrefactor is a python script that removes C++ templates, and moves function implementations to the source file.
 
-==========
+================================
 Replacing template parameters
-==========
+================================
 
 
 Functionrefactor removes templates from C++ code by replacing the template argument with an using statement or constexpr.
@@ -86,9 +86,9 @@ However for the example above a float precision is adequate, making the template
 
 Any constants declared within the template arguments are going to be replaced with a constexpr and any default values will be used in the using/constexpr expression.
 
-==========
+================================
 Moving function Implementations
-==========
+================================
 
 Besides converting the template, this also allows you to prototype a class interface and anything else you want in the header file and then this will automatically create the header file and cpp file for you.
 This will not happen on all cases, it depends in what keywords have been used in the function declaration. For example by default (explicitly declared) inline functions are left in the header file, as set by the settings.json file.
@@ -108,7 +108,15 @@ Release Notes
 
 Usage
 -----------------
-**Instructions to follow**
+Installation through PIP will be added shortly, at the moment you can launch the program by running the functionrefactor.py file by either providing a launcher file (see examples/.fucntionrefactor.json file for expected format).
+
+
+    python3 functionrefactor.py {path to json launcher file}
+    python3 functionrefactor.py {path to input header file} {path to output hpp} {path to output cpp}
+
+Alternatively you can do a local pip install from the functionrfactor root folder and then launching it as before.
+
+    *sudo* pip install ./
 
 
 
