@@ -1,10 +1,10 @@
 {
-    "cases_to_run": {
-        "01": true,
-        "02": true,
-        "03": true,
-        "inactive_scenario": false
-    },
-    "Help:": "key cases_to_run lists all the cases to run (normally using pytest).",
-    "Help++": "The filename is expected as follows: for case'01' is 01_in.hpp the output is simply 01.cpp and 01.hpp"
+
+   "launcher":[
+        {"input":"01_in.hpp","active":true, "hpp_out":"01.hpp", "cpp_out":"01.cpp", "overwrite":false},
+        {"input":"02_in.hpp","active":true, "hpp_out":"02.hpp", "cpp_out":"02.cpp", "overwrite":false},
+        {"input":"03_in.hpp","active":true, "hpp_out":"03.hpp", "cpp_out":"03.cpp", "overwrite":false},
+        {"input":"inactive.hpp", "active":false, "hpp_out":"out/", "cpp_out":"out/"}
+     ]
+
 }

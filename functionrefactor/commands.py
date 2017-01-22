@@ -1,6 +1,7 @@
 from functionrefactor.header import HeaderDef
 from functionrefactor.parser import Parser
 from functionrefactor.formatter import Formatter
+from functionrefactor.settings import *
 import sys
 import os
 import json
@@ -31,49 +32,56 @@ def parse_header(filename):
 
 
 def parse_to_file(filename, hpp_file=None, cpp_file=None):
+    ''' filename: the input header to be processed
+        hpp_file: the output header
+        cpp_file the output cpp file
+        If any of the output hpp/cpp files is emited the parse header will be returned.
+        This is intended for use in testing'''
     [output_hpp, output_cpp] = parse_header(filename)
 
-    if not output_hpp:
-        print("HeaderFile: ")
-        print(output_hpp)
-    elif hpp_file:
+    if hpp_file:
         with open(hpp_file, 'w') as hpp:
             hpp.writelines(s + '\n' for s in output_hpp)
-
-    if not output_cpp:
-        print("SourceFile: ")
-        print(output_cpp)
-    elif cpp_file:
+    if cpp_file:
         with open(cpp_file, 'w') as cpp:
             cpp.writelines(s + '\n' for s in output_cpp)
 
+    if not hpp_file or not cpp_file:
+        return [output_hpp, output_cpp]
 
-def load_launcher(file_path):
 
+def launch_cases(jfile_path):
+    ''' runs a sets of cases defined in a json file. It need to include a json key "launcher"
+    '''
     try:
-        with open(file_path, "r") as launcher:
+        with open(jfile_path, "r") as launcher:
             launcher_file = json.load(launcher)
     except FileNotFoundError:
         print('File not found, file_path: ' + file_path)
         return
 
+    settings.update_global_settings(launcher_file)
     launch_list = launcher_file['launcher']
-    path = os.path.dirname(launcher.name)
-    sep = os.path.sep
+    base_folder = os.path.dirname(launcher.name)
 
-    print('path: ' + path)
+    for input_key in launch_list:
+        launch_case(base_folder, input_key)
 
-    for input_file in launch_list:
 
-        if input_file['active']:
-            file_name = os.path.splitext(
-                os.path.basename(input_file['input']))[0]
-            print('input:')
-            print(file_name)
-            parse_to_file(
-                path + sep + input_file['input'],
-                path + sep + input_file['hpp_out'] + file_name + '.hpp',
-                path + sep + input_file['cpp_out'] + file_name + '.cpp')
+def launch_case(base_folder, jobj_case, launch_list=None):
+    if jobj_case['active']:
+
+        sep = os.path.sep
+        settings.update_case_settings(jobj_case)
+
+        file_name = os.path.splitext(os.path.basename(jobj_case['input']))[0]
+        if jobj_case['overwrite']:
+            return parse_to_file(
+                path + sep + jobj_case['input'],
+                path + sep + jobj_case['hpp_out'] + file_name + '.hpp',
+                path + sep + jobj_case['cpp_out'] + file_name + '.cpp')
+        else:
+            return parse_to_file(path + sep + jobj_case['input'])
 
 
 def execute(argv=None):
@@ -85,9 +93,9 @@ def execute(argv=None):
 def main(args):
     """Entry point for the application script"""
     if len(args) == 0:
-        load_launcher('.functionrefactor.json')
+        launch_cases('.functionrefactor.json')
     elif '.json' in args[0]:
-        load_launcher(args[0])
+        launch_cases(args[0])
     else:
         if len(args) == 2:
             parse_to_file(args[1])
