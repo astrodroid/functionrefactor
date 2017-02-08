@@ -85,7 +85,6 @@ class ClassDef(Abstract):
          format_cpp and format_hpp methods
          returns last element
         '''
-        print(d.get_type())
         self.components.append(d)
         return d
 
@@ -211,7 +210,6 @@ class HeaderDef(Abstract):
         for d in self.nested_declarations:
             return_val = append(return_val, d.format_cpp(self, False))
 
-        #return_val = append(return_val, "\n")
         return return_val
 
     def get_lines_cpp(self, header_file=None):
@@ -224,9 +222,6 @@ class HeaderDef(Abstract):
         for d in self.nested_declarations:
             return_val = append(return_val, d.format_hpp(self))
 
-        #return_val = append(return_val, "\n")
-        #print(" return_val: " + return_val + "nested_declarations size:")
-        # print(len(self.nested_declarations))
         return return_val
 
     def get_lines_hpp(self):
